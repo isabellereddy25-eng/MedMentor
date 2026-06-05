@@ -2,7 +2,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### 1. Add your OpenAI API key
+
+Flashcard and quiz generation uses the OpenAI API. Create a `.env.local` file in the project root:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit `.env.local` and replace the placeholder with your key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+
+If you deploy to Vercel, add `OPENAI_API_KEY` in **Project Settings → Environment Variables**.
+
+### 2. Run the development server
 
 ```bash
 npm run dev

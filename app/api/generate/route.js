@@ -1,9 +1,19 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY is not configured. Add it to .env.local and restart the dev server.');
+  }
+  return new OpenAI({ apiKey });
+}
 
 export async function POST(req) {
   const { topic } = await req.json();
+
+  if (!topic?.trim()) {
+    return Response.json({ error: 'Please enter a topic or paste your notes.' }, { status: 400 });
+  }
 
   const prompt = `You are a medical study assistant. Based on this topic or notes: "${topic}"
   
@@ -24,6 +34,7 @@ Return ONLY valid JSON in this exact format:
 }`;
 
   try {
+    const openai = getOpenAIClient();
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: prompt }],
