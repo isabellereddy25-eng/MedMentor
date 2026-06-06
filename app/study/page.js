@@ -534,6 +534,8 @@ function StudyContent() {
     { id: 'quiz', label: '📝 Quiz', desc: `${set.questions?.length || 0} questions · randomized each time` },
     { id: 'match', label: '🎯 Matching game', desc: 'Match terms to definitions against the clock' },
     { id: 'flappy', label: '🐦 MedFlap', desc: 'Answer questions to keep your bird flying!' },
+    { id: 'mario', label: '🍄 MedMario', desc: 'Run through the world and answer questions!' },
+    { id: 'chat', label: '🩺 AI Tutor', desc: 'Ask questions and get personalized lessons' },
   ]
 
   return (
@@ -577,6 +579,9 @@ function StudyContent() {
                     if (m.id === 'flashcards') startFlashcards()
                     if (m.id === 'quiz') { setCardsDone(false); startQuiz(set.questions || []) }
                     if (m.id === 'match') startMatch()
+                    if (m.id === 'mario') router.push(`/mario-game?index=${index}`)
+                    if (m.id === 'chat') router.push(`/chat?index=${index}`)
+                    if (m.id === 'flappy') router.push(`/flappy-game?index=${index}`)
                   }}
                   style={{ textAlign: 'left', cursor: 'pointer', border: '1.5px solid #eee', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: 'white', transition: 'border-color 0.2s', width: '100%' }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = '#534AB7'}
